@@ -146,18 +146,30 @@ void imprimir_assentos(Compra* compras, int tam){
     }
 }
 void imprimir_menu(){
-printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n");
+printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo");
 }
-
+void salvaraquivos(const char *nome_arquivo, int *dados){
+FILE *arquivo = fopen(nome_arquivo, "w");
+if (arquivo == NULL) {
+        printf("Erro ao criar o arquivo!\n");
+        return;
+    }
+fprintf(arquivo, "quantidade inteira: %d\n", dados[0]);
+fprintf(arquivo, "quantidade meia: %d\n", dados[1]);
+fclose(arquivo);
+printf("Arquivo salvo com sucesso!");
+}
 int main(){
 int tam = 10, qtd_inteira = 0, qtd_meia = 0, escolha, continuar = 1;
 float valor_inteira = 15;
+char nome_arquivo[20];
 Compra compras[tam*tam];
+int dados[2] = {qtd_inteira, qtd_meia};
 inicializar_compras(compras, tam);
 imprimir_menu();
 
 while (continuar == 1){
-printf("\nO que desejas fazer? (digite 5 para ver o menu de opções novamente): ");
+printf("\nO que desejas fazer? (digite 6 para ver o menu de opções novamente): ");
 scanf("%i", &escolha);
 switch(escolha){
     case 0:
@@ -186,6 +198,14 @@ switch(escolha){
     printf("Quantidade de ingressos inteira: %i", qtd_inteira);
     break;
     case 5:
+    contabilizar_ingressos(compras, tam, &qtd_inteira, &qtd_meia);
+    dados[0] = qtd_inteira;
+    dados[1] = qtd_meia;
+    printf("Digite o nome do arquivo a ser criado: ");
+    scanf("%s", nome_arquivo);
+    salvaraquivos(nome_arquivo, dados);
+    break;
+    case 6:
     imprimir_menu();
     break;
     default:
