@@ -148,14 +148,44 @@ void imprimir_assentos(Compra* compras, int tam){
 void imprimir_menu(){
 printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo");
 }
-void salvaraquivos(const char *nome_arquivo, int *dados){
+void salvaraquivos(const char *nome_arquivo, int *dados, Compra* compras, int tam){
 FILE *arquivo = fopen(nome_arquivo, "w");
+char assentos[tam][tam];
+float valor_arrecadado = 0;
 if (arquivo == NULL) {
         printf("Erro ao criar o arquivo!\n");
         return;
     }
 fprintf(arquivo, "quantidade inteira: %d\n", dados[0]);
 fprintf(arquivo, "quantidade meia: %d\n", dados[1]);
+fprintf(arquivo, "\nMapa dos assentos(X para ocupado # para livre): \n");
+fprintf(arquivo, "  ");
+    for(int i = 0; i < tam; i++){
+    fprintf(arquivo, "%i ", i + 1);
+    }
+
+    for(int i = 0; i < tam; i++){
+        if(i+1 < 10){
+        fprintf(arquivo, "\n%i ", i + 1);
+    }
+        else{
+            fprintf(arquivo, "\n%i", i + 1);
+        }
+        for(int j = 0; j < tam; j++){
+            int numero_assento = i*tam + j;
+            if(compras[numero_assento].assento == 0){
+                assentos[i][j] = '#';
+            }
+            if(compras[numero_assento].assento == 1){
+                assentos[i][j] = 'X';
+            }
+            fprintf(arquivo, "%c ", assentos[i][j]);
+        }
+    }
+for(int i = 0; i < tam*tam; i++){
+    valor_arrecadado += compras[i].valor;
+}
+fprintf(arquivo, "\nValor adquirido: %.2f", valor_arrecadado);
 fclose(arquivo);
 printf("Arquivo salvo com sucesso!");
 }
@@ -203,7 +233,7 @@ switch(escolha){
     dados[1] = qtd_meia;
     printf("Digite o nome do arquivo a ser criado: ");
     scanf("%s", nome_arquivo);
-    salvaraquivos(nome_arquivo, dados);
+    salvaraquivos(nome_arquivo, dados, compras, tam);
     break;
     case 6:
     imprimir_menu();
