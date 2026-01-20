@@ -19,7 +19,7 @@
 
 ## Como rodar o projeto
 
-### Opção 1 — Usuário final (Windows)
+### 🔹 Opção 1 — Usuário final (Windows)
 
 Se você **apenas deseja executar o programa**, sem modificar o código:
 
