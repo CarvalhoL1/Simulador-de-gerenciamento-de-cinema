@@ -1,11 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
 #include <string.h>
+#include <locale.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include "cinema.h"
 
 int main(){
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+    setlocale(LC_ALL, "");
 int tam = 10, qtd_inteira = 0, qtd_meia = 0, escolha, continuar = 1;
 float valor_inteira = 15;
 char nome_arquivo[21];
