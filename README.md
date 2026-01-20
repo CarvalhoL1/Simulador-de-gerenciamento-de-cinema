@@ -52,3 +52,8 @@ Na pasta raiz do projeto, execute:
 ```bash
   gcc -Iinclude src/main.c src/cinema.c -o gerenciador.exe
 ```
+e depois:
+```bash
+  ./gerenciador.exe
+```
+
