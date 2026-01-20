@@ -147,96 +147,52 @@ void imprimir_assentos(Compra* compras, int tam){
 }
 
 void imprimir_menu(){
-printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo\n 6: Abrir e registrar arquivo previamente adquirido (isso atualizara a quantidade de ingressos e assentos adquiridos até o momento)");
+printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n");
 }
 
-void salvaraquivos(const char *nome_arquivo, int *dados, Compra* compras, int tam){
-FILE *arquivo = fopen(nome_arquivo, "w");
-char assentos[tam][tam];
-float valor_arrecadado = 0;
-if (arquivo == NULL) {
-        printf("Erro ao criar o arquivo!\n");
-        return;
-    }
-fprintf(arquivo, "quantidade inteira: %d\n", dados[0]);
-fprintf(arquivo, "quantidade meia: %d\n", dados[1]);
-fprintf(arquivo, "\nMapa dos assentos(M para ocupado por meia, I para ocupado por inteira e # para livre): \n");
-fprintf(arquivo, "  ");
-    for(int i = 0; i < tam; i++){
-    fprintf(arquivo, "%i ", i + 1);
-    }
+int main(){
+int tam = 10, qtd_inteira = 0, qtd_meia = 0, escolha, continuar = 1;
+float valor_inteira = 15;
+Compra compras[tam*tam];
+inicializar_compras(compras, tam);
+imprimir_menu();
 
-    for(int i = 0; i < tam; i++){
-        if(i+1 < 10){
-        fprintf(arquivo, "\n%i ", i + 1);
+while (continuar == 1){
+printf("\nO que desejas fazer? (digite 5 para ver o menu de opções novamente): ");
+scanf("%i", &escolha);
+switch(escolha){
+    case 0:
+    printf("Encerrando...");
+    continuar = 0;
+    break;
+    case 1:
+    imprimir_assentos(compras, tam);
+    break;
+    case 2:
+    if(verificar_espacos(compras, tam) == 0){
+        printf("Infelizmente nao tem mais lugares disponiveis na sala prime!");
     }
-        else{
-            fprintf(arquivo, "\n%i", i + 1);
-        }
-        for(int j = 0; j < tam; j++){
-            int numero_assento = i*tam + j;
-            if(compras[numero_assento].assento == 0){
-                assentos[i][j] = '#';
-            }
-            if(compras[numero_assento].assento == 1){
-                if(compras[numero_assento].entrada == 1){
-                assentos[i][j] = 'I';
-            }
-                else if(compras[numero_assento].entrada == 0){
-                    assentos[i][j] = 'M';
-                }
-            }
-            fprintf(arquivo, "%c ", assentos[i][j]);
-        }
+    else{
+        int cadeira_escolhida = selecionar_assento(compras, tam);
+        if(cadeira_escolhida != -1){
+        registrarcompra(compras, valor_inteira, cadeira_escolhida);}
     }
-for(int i = 0; i < tam*tam; i++){
-    valor_arrecadado += compras[i].valor;
+    break;
+    case 3: 
+    imprimir_valor(compras, tam);
+    break;
+    case 4:
+    contabilizar_ingressos(compras, tam, &qtd_inteira, &qtd_meia);
+    printf("Quantidade de ingressos meia entrada: %i\n", qtd_meia);
+    printf("Quantidade de ingressos inteira: %i", qtd_inteira);
+    break;
+    case 5:
+    imprimir_menu();
+    break;
+    default:
+    printf("Digito invalido!");
+    break;
 }
-fprintf(arquivo, "\nValor adquirido: %.2f", valor_arrecadado);
-fclose(arquivo);
-printf("Arquivo salvo com sucesso!");
 }
-void ler_arquivo(const char *nome_arquivo, int *dados, Compra* compras, int tam){
-FILE *arquivo = fopen(nome_arquivo, "r");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo! verifique se esse é realmente o nome do arquivo\n");
-        return;
-    }
-char linha[200];
-
-fscanf(arquivo, "quantidade inteira: %d\n", &dados[0]);
-fscanf(arquivo, "quantidade meia: %d\n", &dados[1]);
-do {
-    //Procura uma linha que começa com um numero(Ou seja, a linha da matriz do mapa)
-        fgets(linha, sizeof(linha), arquivo);
-    } while (linha[0] < '0' || linha[0] > '9');
-    for(int i = 0; i < tam; i++){
-        int coluna = 0;
-        for(int j = 0; j < tam; j++){
-            while(linha[coluna] != 'I' && linha[coluna] != 'M' && linha[coluna] != '#' && linha[coluna] != '\0'){
-                coluna++;
-            }
-            char c = linha[coluna];
-            int numero_assento = i*tam + j;
-            if (c == '#') {
-                compras[numero_assento].assento = 0;
-                compras[numero_assento].entrada = -1;
-                compras[numero_assento].valor = 0;
-            }
-            else if (c == 'M') {
-                compras[numero_assento].assento = 1;
-                compras[numero_assento].entrada = 0;
-                compras[numero_assento].valor = 7.5;
-            }
-            else if (c == 'I') {
-                compras[numero_assento].assento = 1;
-                compras[numero_assento].entrada = 1;
-                compras[numero_assento].valor = 15;
-            }
-            coluna++;
-        }
-        fgets(linha, sizeof(linha), arquivo);
-    }
-fclose(arquivo);
-printf("Arquivo lido com sucesso! as informações foram atualizadas");
-}   
+    return 0;
+}
