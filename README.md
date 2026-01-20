@@ -44,13 +44,11 @@ Indicada para quem deseja **estudar, modificar ou evoluir o projeto**.
 
 #### Requisitos
 - GCC  
-- make
 - Windows (MSYS2/MinGW), Linux ou macOS
 
 #### Compilação
 Na pasta raiz do projeto, execute:
 
 ```bash
-  make
-  make run
+  gcc -Iinclude src/main.c src/cinema.c -o gerenciador.exe
 ```
