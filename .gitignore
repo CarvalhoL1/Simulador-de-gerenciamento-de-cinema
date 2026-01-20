@@ -1,0 +1,21 @@
+# Pasta de build (binários e objetos)
+build/
+
+# Executáveis
+*.exe
+*.out
+
+# Arquivos objeto
+*.o
+
+# Arquivos gerados pelo programa
+data/
+
+# Configurações locais do VS Code
+.vscode/
+
+# Arquivos temporários do sistema
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
