@@ -1,15 +1,20 @@
 # Simulador de gerenciamento de cinema
 - Projeto feito na cadeira de introdução a programção 1 para praticar a linguagem C
-- A ideia do projeto e facilitar a gestão de uma sala de cinema.
+- O sistema simula a **gestão de uma sala de cinema**, permitindo reservar assentos, controlar vendas de ingressos e salvar/recuperar dados entre execuções.
+
 
 # Funcionalidades
-- Disponibilizar reservas de assentos (podendo ser ingressos meia entrada ou inteira).
-- Mostrar os assentos disponiveis.
-- Imprimir o valor arrecadado pela sala.
-- Mostrar a quantia de ingressos meia e inteira.
-- Salvar como arquivo a quantidade de ingressos, o valor arrecadado e o mapa de assentos da sala.
-- Ler arquivos que foram criados previamente pelo programa, atualizando os dados atuais;
-  
+- Reserva de assentos na sala de cinema  
+- Opção de ingresso **meia entrada** ou **inteira**  
+- Visualização do mapa de assentos (disponíveis e ocupados)  
+- Exibição do **valor total arrecadado**  
+- Contagem de ingressos vendidos (meia e inteira)  
+- Salvamento de dados em arquivo:
+  - mapa de assentos
+  - quantidade de ingressos
+  - valor arrecadado
+- Leitura de arquivos salvos anteriormente, restaurando o estado da sala
+
 ## Observação
 - Defini a sala como tendo 10 fileiras e 10 colunas de assentos, porém isso pode ser facilmente ajustado.
 - Também defini o valor do ingresso meia entrada como 7.5, e a inteira como 15, mas isso também pode ser alterado. 
@@ -19,7 +24,7 @@
 
 ## Como rodar o projeto
 
-### 🔹 Opção 1 — Usuário final (Windows)
+### Opção 1 — Usuário final (Windows)
 
 Se você **apenas deseja executar o programa**, sem modificar o código:
 
@@ -33,7 +38,7 @@ Se você **apenas deseja executar o programa**, sem modificar o código:
 ```
  Não é necessário instalar compilador, VS Code ou dependências.
  
-### 🔹 Opção 2 — Compilar a partir do código (desenvolvedores)
+### Opção 2 — Compilar a partir do código (desenvolvedores)
 
 Indicada para quem deseja **estudar, modificar ou evoluir o projeto**.
 
