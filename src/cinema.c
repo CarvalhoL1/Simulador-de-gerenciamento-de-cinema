@@ -236,5 +236,5 @@ fclose(arquivo);
 printf("Arquivo lido com sucesso! as informações foram atualizadas");
 }
 void imprimir_menu(){
-printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n");
+printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo\n 6: Abrir e registrar arquivo previamente adquirido (isso atualizara a quantidade de ingressos e assentos adquiridos até o momento)");
 }

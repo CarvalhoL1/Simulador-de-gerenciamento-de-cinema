@@ -1,6 +1,6 @@
 # Pasta de build (binários e objetos)
-build/
-
+build/*
+!build/gerenciador.exe
 # Executáveis
 *.exe
 *.out
