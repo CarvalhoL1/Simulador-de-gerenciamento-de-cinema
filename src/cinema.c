@@ -7,13 +7,13 @@
 void inicializar_compras(Compra* compras, int tam){
     for(int i = 0; i < tam*tam; i++){
     compras[i].assento = 0;
-    //o valor inicial Ã© 0, caso uma compra vÃ¡ ser feita, Ã© alterado para o preÃ§o do ingresso
+    //o valor inicial Ã© 0, caso uma compra vá ser feita, é alterado para o preço do ingresso
     compras[i].valor = 0;
     compras[i].entrada = -1;
     //Coloquei um nome generico para o id, o nome do filme e a categoria
     sprintf(compras[i].id, "%04d", i+1);
     strcpy(compras[i].nomefilme, "O filme");
-    strcpy(compras[i].categoria, "AÃ§Ã£o");
+    strcpy(compras[i].categoria, "Ação");
     }
     
 }
@@ -25,7 +25,7 @@ for(int i = 0; i < tam*tam; i++){
     printf("ate agora, arrecadamos %.2f", valor_arrecadado);
 }
 void registrarcompra(Compra* compras, float valor_inteira, int cadeira_escolhida){
-    //se o status da entrada Ã© 0, Ã© meia entrada, 1 Ã© inteira, para assento, 0 Ã© vazio e 1 Ã© ocupado
+    //se o status da entrada é 0, é meia entrada, 1 é inteira, para assento, 0 é vazio e 1 é ocupado
     if(cadeira_escolhida < 0) return;
     if(compras[cadeira_escolhida].entrada == 0){
         compras[cadeira_escolhida].valor = valor_inteira/2;
@@ -90,11 +90,11 @@ int selecionar_assento(Compra* compras, int tam){
             return cadeira_escolhida;
         }
         else{
-            printf("Digito invalido!");
+            printf("Digito inválido!");
         }
     }
     if(compras[cadeira_escolhida].assento == 1){
-        printf("Cadeira ocupada, deseja escolher outra? 1 para sim, 0 para nÃ£o");
+        printf("Cadeira ocupada, deseja escolher outra? 1 para sim, 0 para não");
         scanf("%i", &continuar);
         if(continuar == 0){
             return -1;
@@ -102,7 +102,7 @@ int selecionar_assento(Compra* compras, int tam){
         }
     }}
     else{
-        printf("O assento que voce escolheu nao existe! deseja escolher outro? 1 para sim, 0 para nÃ£o\n: ");
+        printf("O assento que voce escolheu nao existe! deseja escolher outro? 1 para sim, 0 para não\n: ");
         scanf("%i", &continuar);
         if(continuar == 0){
             return -1;
@@ -194,7 +194,7 @@ printf("Arquivo salvo com sucesso!");
 void ler_arquivo(const char *nome_arquivo, int *dados, Compra* compras, int tam){
 FILE *arquivo = fopen(nome_arquivo, "r");
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo! verifique se esse Ã© realmente o nome do arquivo\n");
+        printf("Erro ao abrir o arquivo! verifique se esse é realmente o nome do arquivo\n");
         return;
     }
 char linha[200];
@@ -233,8 +233,8 @@ do {
         fgets(linha, sizeof(linha), arquivo);
     }
 fclose(arquivo);
-printf("Arquivo lido com sucesso! as informaÃ§Ãµes foram atualizadas");
+printf("Arquivo lido com sucesso! as informações foram atualizadas");
 }
 void imprimir_menu(){
-printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo\n 6: Abrir e registrar arquivo previamente adquirido (isso atualizara a quantidade de ingressos e assentos adquiridos atÃ© o momento)");
+printf("\n 0: sair\n 1: ver mapa dos ingressos\n 2: comprar assento\n 3: ver valor arrecadado\n 4: ver a quantidade de ingressos inteira e meia entrada adquiridos ate o momento\n 5: salvar como arquivo\n 6: Abrir e registrar arquivo previamente adquirido (isso atualizara a quantidade de ingressos e assentos adquiridos até o momento)");
 }
